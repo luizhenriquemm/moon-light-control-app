@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="connect_title">Conectar a um servidor</string>
+    <string name="connect_address_label">Endereço do servidor</string>
+    <string name="connect_address_hint">ex.: 10.1.1.20 ou stage-pi.local</string>
+    <string name="connect_open">Abrir</string>
+
+    <string name="connect_error_empty">Digite o endereço do servidor.</string>
+    <string name="connect_error_scheme">Só são aceitos endereços http:// e https://.</string>
+    <string name="connect_error_host">Este endereço de servidor não é válido.</string>
+    <string name="connect_error_port">A porta deve ser um número de 1 a 65535.</string>
+
+    <string name="local_network_denied">O MoonLightControl precisa de acesso à rede local para chegar ao servidor. Permita “Dispositivos por perto” nas configurações do app.</string>
+    <string name="open_app_settings">Abrir configurações</string>
+</resources>

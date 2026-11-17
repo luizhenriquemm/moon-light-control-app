@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">MoonLightControl</string>
+
+    <string name="connect_title">Connect to a server</string>
+    <string name="connect_address_label">Server address</string>
+    <string name="connect_address_hint">e.g. 10.1.1.20 or stage-pi.local</string>
+    <string name="connect_open">Open</string>
+
+    <string name="connect_error_empty">Type the server address.</string>
+    <string name="connect_error_scheme">Only http:// and https:// addresses are supported.</string>
+    <string name="connect_error_host">This server address is not valid.</string>
+    <string name="connect_error_port">The port must be a number from 1 to 65535.</string>
+
+    <string name="local_network_denied">MoonLightControl needs access to the local network to reach the server. Allow “Nearby devices” in the app settings.</string>
+    <string name="open_app_settings">Open settings</string>
+</resources>
