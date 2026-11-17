@@ -12,11 +12,12 @@ between venues (church, rehearsal room, home…). Personal use first; to be publ
 Full brief, server facts and milestones: [docs/BRIEF.md](docs/BRIEF.md). Read it before working.
 
 ## Current state
-**Milestone 1 done + recent servers + discovery** (2026-11-17): start screen lists up to 5 recently
-used servers (one tap opens; login cookie persists 30 days, so no re-login), a "Find servers" subnet
-scan (milestone 4, done early) and a typed address → WebView console; targetSdk 37 with the
-`ACCESS_LOCAL_NETWORK` flow. Tested on the real tablet against the
-user's server (10.1.1.200:8080). Next: rest of milestone 2 (see OPEN_QUESTIONS), then milestone 3.
+2026-11-17: milestones 1, 3 and 4 (discovery) done, milestone 2 partly (recent servers list).
+Start screen: recent servers (≤ 5), "Find servers" subnet scan, typed address. Console: full screen,
+screen kept on, error view, show export/import, self-signed HTTPS trust on first use, app bridge
+(logout / Change server). targetSdk 37 with `ACCESS_LOCAL_NETWORK`. Release 0.1.0 (versionCode 1)
+built, signed with the user's upload key and installed on the tablet; store assets/texts in
+docs/store. Next: the user's Play Console steps, screenshots — see docs/RELEASE.md.
 
 ## Commands (Windows, Git Bash)
 New shells may lack the user env vars: prefix with
@@ -25,6 +26,9 @@ New shells may lack the user env vars: prefix with
 - `./gradlew connectedAndroidTest` — Compose UI tests on a device/emulator
   (`$ANDROID_HOME/emulator/emulator -avd Medium_Phone_API_37.0 -no-window` for a headless emulator).
 - `./gradlew assembleDebug` → `androidApp/build/outputs/apk/debug/androidApp-debug.apk`.
+- Debug builds are `br.com.moonaudio.moonlightcontrol.debug` ("Moon Light Control (debug)"), next to the
+  real app; tests never touch the real app's data. Release: `./gradlew assembleRelease|bundleRelease`
+  (R8 on), signed only when the user's upload key exists (docs/RELEASE.md).
 - `./gradlew installDebug` puts it on the device (data kept). `connectedAndroidTest` leaves the app
   installed (gradle.properties) so the tablet keeps its login. Real tablet: Galaxy Tab S10 FE (SM-X520,
   Android 16), USB. Debug the page: `adb forward tcp:9222 localabstract:webview_devtools_remote_<pid>`.

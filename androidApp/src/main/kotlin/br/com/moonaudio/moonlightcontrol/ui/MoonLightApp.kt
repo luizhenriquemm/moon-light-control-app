@@ -18,6 +18,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.moonaudio.moonlightcontrol.LocalNetworkAccess
 import br.com.moonaudio.moonlightcontrol.data.RecentServersStore
 import br.com.moonaudio.moonlightcontrol.data.ServerDiscovery
+import br.com.moonaudio.moonlightcontrol.data.TrustedCertificatesStore
+import br.com.moonaudio.moonlightcontrol.data.trustedCertificatesDataStore
 import br.com.moonaudio.moonlightcontrol.data.recentServersDataStore
 import br.com.moonaudio.moonlightcontrol.shared.ServerAddress
 import kotlinx.coroutines.Job
@@ -41,6 +43,8 @@ fun MoonLightApp() {
     val store = remember { RecentServersStore(context.applicationContext.recentServersDataStore) }
     val discovery = remember { ServerDiscovery.create(context) }
     val recentServers by store.servers.collectAsStateWithLifecycle(initialValue = emptyList())
+    val certificates = remember { TrustedCertificatesStore(context.applicationContext.trustedCertificatesDataStore) }
+    val trustedCertificates by certificates.certificates.collectAsStateWithLifecycle(initialValue = emptyMap())
     val scope = rememberCoroutineScope()
 
     // The opened server; null = start screen. Survives process recreation.
@@ -106,9 +110,12 @@ fun MoonLightApp() {
     if (address != null) {
         ConsoleScreen(
             url = address.rootUrl,
+            origin = address.origin,
             onExit = { consoleAddress = null },
             // A server goes to the recent list once its page actually loaded.
             onLoaded = { scope.launch { store.recordSuccess(address) } },
+            trustedCertificates = trustedCertificates,
+            onTrustCertificate = { origin, fingerprint -> scope.launch { certificates.trust(origin, fingerprint) } },
         )
     } else {
         ConnectScreen(

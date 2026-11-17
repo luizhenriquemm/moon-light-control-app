@@ -3,6 +3,13 @@
 When answered, record the answer in DECISIONS.md and remove it from here.
 
 ## Pending
+- For the server repo (not this one): the server never shows its TLS certificate's SHA-256
+  fingerprint, so the user cannot compare it with the one the app shows when trusting a
+  self-signed server. Suggest: `moonlightcontrol tls status` (and the web UI's config page) print it.
+- Manual checks still to do on the real tablet with the real server: log in → Settings → Account →
+  Log out (back to the start screen); export a show (save dialog, accented name); import a show
+  (creates data on the server — the user's call); faders with several fingers; HTTPS with a
+  self-signed certificate (needs `tls enable --self-signed` on the server).
 - Does the user want an option to **not** stay logged in (e.g. a shared tablet)? Logins persist
   30 days today. App-only option: forget a server's cookie when leaving it; a "remember me" checkbox
   on the web login would need the server repo.
@@ -20,8 +27,7 @@ When answered, record the answer in DECISIONS.md and remove it from here.
 - Discovery only finds servers on port 8080 in the device's /24. For the server repo (not this one):
   an mDNS/DNS-SD advertisement and/or a product field in `/api/v1/health` (e.g.
   `"product":"moonlightcontrol"`) would make discovery simpler and unambiguous.
-- Before the Play release: add the GPL-3.0-or-later `LICENSE` file and per-file notices policy;
-  write the privacy policy (no data collected, LAN only) for moonaudio.com.br; line up 12 testers for
-  the 14-day closed test; create the Play Console account (individual, identity verification).
+- Release (see docs/RELEASE.md): 12 testers for 14 days (privacy policy live at
+  https://www.moonaudio.com.br/moonlightcontrol/privacidade.html; screenshots done).
 - If Moon Audio gets a CNPJ later: an organization account (D-U-N-S + website verified in Search
   Console) skips the 12-tester rule; the package id already fits.

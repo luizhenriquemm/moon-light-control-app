@@ -24,6 +24,32 @@
     <string name="discover_no_network">Connect to the lighting network’s Wi-Fi to find servers.</string>
     <string name="discover_version">Version %1$s</string>
 
+    <string name="console_error_title">Can\u2019t reach the server</string>
+    <string name="console_error_detail">%1$s\n%2$s</string>
+    <string name="console_error_certificate">The server\u2019s certificate was not trusted.</string>
+    <string name="console_retry">Try again</string>
+    <string name="console_change_server">Change server</string>
+
+    <string name="download_saved">Saved: %1$s</string>
+    <string name="download_failed">Could not save %1$s</string>
+
+    <string name="cert_unknown_title">Trust this server?</string>
+    <string name="cert_unknown_message">%1$s uses its own (self-signed) certificate. Trust it only if this is your MoonLightControl server.\n\nCertificate fingerprint (SHA-256):\n%2$s</string>
+    <string name="cert_changed_title">The server\u2019s certificate changed!</string>
+    <string name="cert_changed_message">%1$s presented a different certificate than the one you trusted before. Someone may be impersonating the server. Continue only if you changed the server\u2019s certificate yourself.\n\nTrusted before:\n%2$s\n\nPresented now:\n%3$s</string>
+    <string name="cert_trust">Trust</string>
+    <string name="cert_trust_new">Trust the new certificate</string>
+    <string name="cert_cancel">Cancel</string>
+
+    <string name="about">About</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_description">Opens the MoonLightControl lighting console of a server on your local network.</string>
+    <string name="about_license">Free software under the GNU General Public License, version 3 or later. It comes with no warranty.</string>
+    <string name="about_source">Source code: %1$s</string>
+    <string name="about_copyright">© 2026 Moon Audio</string>
+    <string name="about_close">Close</string>
+    <string name="source_url" translatable="false">https://github.com/luizhenriquemm/moon-light-control-app</string>
+
     <string name="local_network_denied">Moon Light Control needs access to the local network to reach the server. Allow “Nearby devices” in the app settings.</string>
     <string name="open_app_settings">Open settings</string>
 </resources>

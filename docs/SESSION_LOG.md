@@ -48,3 +48,22 @@
   found 10.1.1.200 (version 4b9dade) in a few seconds. Totals: 44 unit tests, 25 device tests, lint clean.
 - Package id changed to `br.com.moonaudio.moonlightcontrol` (user owns moonaudio.com.br; publishing as an
   individual). Old app uninstalled from the tablet, new one installed; 44 unit + 25 device tests green.
+- Milestone 3 built: full screen, keep-awake, error view, export (SAF + pinned TLS) / import (SAF),
+  self-signed HTTPS trust on first use, app bridge. `shared`: `AppBridge`, `DownloadFileName`,
+  `TrustedCertificates` (+18 tests). Device tests use a loopback HTTP/HTTPS `TestServer` with two
+  test certificates (androidTest assets). Found by tests: a refused certificate of another origin left
+  a blank page (now the error view). 62 unit + 42 device tests green, lint clean. On the tablet with the
+  real server: full screen (viewport 1536×960), wake lock held, bridge injected, web "Change server"
+  returns to the start screen.
+- Release prep: R8 release build (1.4 MB, smoke-tested on the tablet), signing from the user's upload
+  key (`tools/create-upload-key.ps1`, run by the user), debug build renamed `.debug` (side by side),
+  LICENSE, About dialog, store icon + feature graphic, pt-BR/en listing, privacy policy. 62 unit +
+  43 device tests green, lint clean. Checklist: docs/RELEASE.md.
+- User created the upload key; release 0.1.0 (versionCode 1) built as signed AAB + APK (signature
+  verified: CN=Moon Light Control, O=Moon Audio, C=BR), signed APK installed on the tablet (replacing
+  the debug-key test copy). Contact e-mail filled in; App access text written. The server repository
+  is still private (404) although the App access text points to it — asked the user.
+- Store screenshots taken: 6 on the real tablet (start screen, faders, scenes, fixtures, shows,
+  universes — sidebar navigation only, no lighting changes; blackout left as the user had it) and 2
+  on the phone emulator (start screen with 10.0.2.2 found, console login), saved in
+  docs/store/screenshots/. Privacy policy live at moonaudio.com.br/moonlightcontrol/privacidade.html.

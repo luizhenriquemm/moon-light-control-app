@@ -82,3 +82,35 @@ Append-only: date — decision (rationale). Superseded decisions stay, with a la
   2026-09-30) as an individual, which also covers APKs distributed outside Play (or "limited
   distribution" to ≤ 20 devices without verification). The domain hosts the privacy policy and the
   product page; it is not required for an individual account (organizations must verify a website).
+- 2026-11-17 — **Milestone 3 (console polish)**, as built:
+  - Full screen always while the console is shown (system bars hidden, transient on swipe; restored on
+    the start screen); only the display cutout is padded, so a swipe never resizes the page mid-show.
+  - Screen kept on always while the console is shown (`View.keepScreenOn` on the WebView).
+  - No app settings screen yet (keep-awake/full screen are not optional); orientation not locked:
+    Android 16+ ignores locks on large screens for apps targeting new SDKs, and the UI works rotated.
+  - Native error view for main-frame failures (network error, HTTP error status, refused
+    certificate): address + reason, "Try again" and "Change server".
+  - Show export: the WebView's download → system "save as" (SAF `CreateDocument`) with the name from
+    `Content-Disposition` (`filename*` UTF-8 first), fetched by the app with the page's cookie and
+    user agent (pinned TLS for self-signed HTTPS). Not `DownloadManager` (it cannot use the pin).
+  - Show import: `onShowFileChooser` → SAF `OpenDocument("*/*")`; the callback is always answered.
+  - Self-signed HTTPS, trust on first use: only the chosen server's exact origin can be trusted; the
+    dialog shows the SHA-256 fingerprint; a different certificate later gets a red "certificate
+    changed" warning where Cancel is the prominent button. Accepted fingerprints persist per origin
+    (`trusted_certificates.json`). Note: Chromium itself remembers an accepted certificate per host
+    for the rest of the process.
+  - App bridge protocol 1 via `WebViewCompat.addWebMessageListener` for the server's exact origin,
+    main frame only: `ready` → `hello` (features logout, switchHost); `logout` → flush cookies + start
+    screen; `switchHost` → start screen. Verified against the real server (the web UI's "Change
+    server" link appears and works).
+- 2026-11-17 — Release build: R8 + resource shrinking; signed with the user's **upload key** (Play App
+  Signing holds the app signing key), created by `tools/create-upload-key.ps1` into
+  `%USERPROFILE%\.android-signing\` (never in the repo; password only in that properties file).
+  Debug builds get `applicationIdSuffix ".debug"` and the label "Moon Light Control (debug)", so
+  development and tests never touch the installed real app.
+- 2026-11-17 — "About" dialog (info button on the start screen): version, GPL notice, source link,
+  "© 2026 Moon Audio". Store graphics generated from the launcher crescent (`tools/store_graphics.py`).
+- 2026-11-17 — Contact e-mail for the store and privacy policy: contato@moonaudio.com.br. App
+  repository made public by the user (GPL source link in About). Google's reviewers get an
+  explanation only ("App access" text in docs/store/listing.md), no demo server.
+- 2026-11-17 — The server repository stays private; the reviewers' "App access" text only covers the app's own screens and names contato@moonaudio.com.br.

@@ -220,6 +220,7 @@ LAN scanning) before implementing.
    bridge** (§6; the server side is already implemented). Manual test
    list on the real tablet against a real server (import, export, faders with several fingers, scene
    recall, HTTPS).
+   Built 2026-11-17 (see DECISIONS); remaining manual checks in OPEN_QUESTIONS.
 4. **Discovery** — subnet scan (and mDNS if the server adds it). Part of v1. Subnet scan done
    2026-11-17 (see DECISIONS).
 5. **Release** — signing key (kept outside the repo), versioning, APK for sideloading first, then

@@ -2,6 +2,7 @@ package br.com.moonaudio.moonlightcontrol.ui
 
 import android.text.format.DateUtils
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -62,6 +64,8 @@ object ConnectScreenTags {
     const val DISCOVER_NONE = "connect.discover.none"
     const val DISCOVER_NO_NETWORK = "connect.discover.noNetwork"
     fun found(address: ServerAddress) = "connect.found.${address.origin}"
+    const val ABOUT = "connect.about"
+    const val ABOUT_DIALOG = "connect.about.dialog"
 }
 
 /** What the "Servers on this network" section shows. */
@@ -93,6 +97,7 @@ fun ConnectScreen(
 ) {
     var input by rememberSaveable { mutableStateOf("") }
     var error by rememberSaveable { mutableStateOf<ParseError?>(null) }
+    var showAbout by rememberSaveable { mutableStateOf(false) }
 
     fun submit() {
         when (val result = ServerAddress.parse(input)) {
@@ -105,97 +110,112 @@ fun ConnectScreen(
     }
 
     Surface(modifier = modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-        Column(
-            modifier = Modifier
-                .safeDrawingPadding()
-                .imePadding()
-                .verticalScroll(rememberScrollState())
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            Text(stringResource(R.string.app_name), style = MaterialTheme.typography.headlineMedium)
+        Box(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .safeDrawingPadding()
+                    .imePadding()
+                    .verticalScroll(rememberScrollState())
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                Text(stringResource(R.string.app_name), style = MaterialTheme.typography.headlineMedium)
 
-            if (recentServers.isNotEmpty()) {
-                Text(
-                    stringResource(R.string.recent_title),
-                    modifier = Modifier.testTag(ConnectScreenTags.RECENT_TITLE),
-                    style = MaterialTheme.typography.titleMedium,
-                )
-                Column(
-                    modifier = Modifier.widthIn(max = 480.dp).fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    recentServers.forEach { recent ->
-                        ServerRow(
-                            title = recent.address.label,
-                            subtitle = stringResource(
-                                R.string.recent_last_connected,
-                                relativeTime(recent.lastConnectedAt, now),
-                            ),
-                            tag = ConnectScreenTags.recent(recent.address),
-                            onOpen = { onOpen(recent.address) },
-                            removeTag = ConnectScreenTags.recentRemove(recent.address),
-                            onRemove = { onRemoveRecent(recent.address) },
-                        )
+                if (recentServers.isNotEmpty()) {
+                    Text(
+                        stringResource(R.string.recent_title),
+                        modifier = Modifier.testTag(ConnectScreenTags.RECENT_TITLE),
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                    Column(
+                        modifier = Modifier.widthIn(max = 480.dp).fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        recentServers.forEach { recent ->
+                            ServerRow(
+                                title = recent.address.label,
+                                subtitle = stringResource(
+                                    R.string.recent_last_connected,
+                                    relativeTime(recent.lastConnectedAt, now),
+                                ),
+                                tag = ConnectScreenTags.recent(recent.address),
+                                onOpen = { onOpen(recent.address) },
+                                removeTag = ConnectScreenTags.recentRemove(recent.address),
+                                onRemove = { onRemoveRecent(recent.address) },
+                            )
+                        }
                     }
                 }
-            }
 
-            DiscoverySection(discovery = discovery, onFindServers = onFindServers, onOpen = onOpen)
+                DiscoverySection(discovery = discovery, onFindServers = onFindServers, onOpen = onOpen)
 
-            Text(stringResource(R.string.connect_title), style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.connect_title), style = MaterialTheme.typography.titleMedium)
 
-            val currentError = error
-            OutlinedTextField(
-                value = input,
-                onValueChange = {
-                    input = it
-                    error = null
-                },
-                modifier = Modifier
-                    .widthIn(max = 480.dp)
-                    .fillMaxWidth()
-                    .testTag(ConnectScreenTags.ADDRESS),
-                label = { Text(stringResource(R.string.connect_address_label)) },
-                placeholder = { Text(stringResource(R.string.connect_address_hint)) },
-                singleLine = true,
-                isError = currentError != null,
-                supportingText = currentError?.let { err ->
-                    {
-                        Text(
-                            stringResource(err.messageRes()),
-                            modifier = Modifier.testTag(ConnectScreenTags.ERROR),
-                        )
-                    }
-                },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Uri,
-                    imeAction = ImeAction.Go,
-                    autoCorrectEnabled = false,
-                ),
-                keyboardActions = KeyboardActions(onGo = { submit() }),
-            )
-
-            Button(onClick = ::submit, modifier = Modifier.testTag(ConnectScreenTags.OPEN)) {
-                Text(stringResource(R.string.connect_open))
-            }
-
-            if (localNetworkDenied) {
-                Text(
-                    stringResource(R.string.local_network_denied),
+                val currentError = error
+                OutlinedTextField(
+                    value = input,
+                    onValueChange = {
+                        input = it
+                        error = null
+                    },
                     modifier = Modifier
                         .widthIn(max = 480.dp)
-                        .testTag(ConnectScreenTags.LOCAL_NETWORK_DENIED),
-                    color = MaterialTheme.colorScheme.error,
-                    textAlign = TextAlign.Center,
+                        .fillMaxWidth()
+                        .testTag(ConnectScreenTags.ADDRESS),
+                    label = { Text(stringResource(R.string.connect_address_label)) },
+                    placeholder = { Text(stringResource(R.string.connect_address_hint)) },
+                    singleLine = true,
+                    isError = currentError != null,
+                    supportingText = currentError?.let { err ->
+                        {
+                            Text(
+                                stringResource(err.messageRes()),
+                                modifier = Modifier.testTag(ConnectScreenTags.ERROR),
+                            )
+                        }
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Uri,
+                        imeAction = ImeAction.Go,
+                        autoCorrectEnabled = false,
+                    ),
+                    keyboardActions = KeyboardActions(onGo = { submit() }),
                 )
-                OutlinedButton(onClick = onOpenAppSettings) {
-                    Text(stringResource(R.string.open_app_settings))
+
+                Button(onClick = ::submit, modifier = Modifier.testTag(ConnectScreenTags.OPEN)) {
+                    Text(stringResource(R.string.connect_open))
                 }
+
+                if (localNetworkDenied) {
+                    Text(
+                        stringResource(R.string.local_network_denied),
+                        modifier = Modifier
+                            .widthIn(max = 480.dp)
+                            .testTag(ConnectScreenTags.LOCAL_NETWORK_DENIED),
+                        color = MaterialTheme.colorScheme.error,
+                        textAlign = TextAlign.Center,
+                    )
+                    OutlinedButton(onClick = onOpenAppSettings) {
+                        Text(stringResource(R.string.open_app_settings))
+                    }
+                }
+            }
+            // Drawn last, over the scrolling content.
+            IconButton(
+                onClick = { showAbout = true },
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .safeDrawingPadding()
+                    .padding(8.dp)
+                    .testTag(ConnectScreenTags.ABOUT),
+            ) {
+                Icon(Icons.Filled.Info, contentDescription = stringResource(R.string.about))
             }
         }
     }
+    if (showAbout) AboutDialog(onDismiss = { showAbout = false })
 }
 
 @Composable

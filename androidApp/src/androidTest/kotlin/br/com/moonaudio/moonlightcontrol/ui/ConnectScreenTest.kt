@@ -184,6 +184,15 @@ class ConnectScreenTest {
     }
 
     @Test
+    fun aboutShowsVersionAndLicense() {
+        compose.setContent { MoonLightTheme { ConnectScreen(onOpen = {}) } }
+        compose.onNodeWithTag(ConnectScreenTags.ABOUT).performClick()
+        compose.onNodeWithTag(ConnectScreenTags.ABOUT_DIALOG).assertIsDisplayed()
+        compose.onNodeWithText(br.com.moonaudio.moonlightcontrol.BuildConfig.VERSION_NAME, substring = true).assertExists()
+        compose.onNodeWithText("GNU", substring = true).assertExists()
+    }
+
+    @Test
     fun localNetworkDeniedMessageIsShown() {
         compose.setContent {
             MoonLightTheme { ConnectScreen(onOpen = {}, localNetworkDenied = true) }

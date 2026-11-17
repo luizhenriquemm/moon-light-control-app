@@ -22,6 +22,31 @@
     <string name="discover_no_network">Conecte-se ao Wi-Fi da rede de iluminação para procurar servidores.</string>
     <string name="discover_version">Versão %1$s</string>
 
+    <string name="console_error_title">Não foi possível conectar ao servidor</string>
+    <string name="console_error_detail">%1$s\n%2$s</string>
+    <string name="console_error_certificate">O certificado do servidor não foi aceito.</string>
+    <string name="console_retry">Tentar de novo</string>
+    <string name="console_change_server">Trocar servidor</string>
+
+    <string name="download_saved">Salvo: %1$s</string>
+    <string name="download_failed">Não foi possível salvar %1$s</string>
+
+    <string name="cert_unknown_title">Confiar neste servidor?</string>
+    <string name="cert_unknown_message">%1$s usa um certificado próprio (autoassinado). Confie apenas se este for o seu servidor MoonLightControl.\n\nImpressão digital do certificado (SHA-256):\n%2$s</string>
+    <string name="cert_changed_title">O certificado do servidor mudou!</string>
+    <string name="cert_changed_message">%1$s apresentou um certificado diferente do que você aceitou antes. Alguém pode estar se passando pelo servidor. Continue apenas se você mesmo trocou o certificado do servidor.\n\nAceito antes:\n%2$s\n\nApresentado agora:\n%3$s</string>
+    <string name="cert_trust">Confiar</string>
+    <string name="cert_trust_new">Confiar no novo certificado</string>
+    <string name="cert_cancel">Cancelar</string>
+
+    <string name="about">Sobre</string>
+    <string name="about_version">Versão %1$s</string>
+    <string name="about_description">Abre o console de iluminação MoonLightControl de um servidor da sua rede local.</string>
+    <string name="about_license">Software livre sob a Licença Pública Geral GNU, versão 3 ou posterior. Fornecido sem garantia.</string>
+    <string name="about_source">Código-fonte: %1$s</string>
+    <string name="about_copyright">© 2026 Moon Audio</string>
+    <string name="about_close">Fechar</string>
+
     <string name="local_network_denied">O Moon Light Control precisa de acesso à rede local para chegar ao servidor. Permita “Dispositivos por perto” nas configurações do app.</string>
     <string name="open_app_settings">Abrir configurações</string>
 </resources>
