@@ -10,6 +10,18 @@
     <string name="connect_error_host">Este endereço de servidor não é válido.</string>
     <string name="connect_error_port">A porta deve ser um número de 1 a 65535.</string>
 
-    <string name="local_network_denied">O MoonLightControl precisa de acesso à rede local para chegar ao servidor. Permita “Dispositivos por perto” nas configurações do app.</string>
+    <string name="recent_title">Servidores recentes</string>
+    <string name="recent_last_connected">Último acesso: %1$s</string>
+    <string name="recent_just_now">agora mesmo</string>
+    <string name="recent_remove">Remover %1$s da lista</string>
+
+    <string name="discover_title">Servidores nesta rede</string>
+    <string name="discover_button">Procurar servidores</string>
+    <string name="discover_scanning">Procurando em %1$s…</string>
+    <string name="discover_none">Nenhum servidor encontrado. Confira se este aparelho está no mesmo Wi-Fi do servidor e se o servidor usa a porta 8080.</string>
+    <string name="discover_no_network">Conecte-se ao Wi-Fi da rede de iluminação para procurar servidores.</string>
+    <string name="discover_version">Versão %1$s</string>
+
+    <string name="local_network_denied">O Moon Light Control precisa de acesso à rede local para chegar ao servidor. Permita “Dispositivos por perto” nas configurações do app.</string>
     <string name="open_app_settings">Abrir configurações</string>
 </resources>

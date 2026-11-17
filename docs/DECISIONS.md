@@ -49,3 +49,36 @@ Append-only: date — decision (rationale). Superseded decisions stay, with a la
   from the origin) so the stored origin matches the WebView's for the app bridge.
 - 2026-11-17 — The console survives a WebView renderer crash (`onRenderProcessGone` → fresh WebView
   reloading the server) instead of crashing the app mid-show.
+- 2026-11-17 — **Recent servers on the start screen** (user request): up to 5, most recent first, one
+  per address (scheme + host + port), added/moved to the top only when the console's main frame
+  finished loading without error; each can be removed. One tap opens it. Stored with DataStore as a
+  versioned JSON file (`recent_servers.json`, unknown fields ignored, invalid entries skipped, corrupted
+  file → empty list). First step of milestone 2; named hosts / editing / auto-resume still to come.
+- 2026-11-17 — **"Keep me logged in" needs no change on either side**: the server's `mlc_login` cookie
+  is already persistent (Max-Age 30 days, renewed while used) and the WebView keeps it across app
+  restarts (`CookieManager.flush()` in `onPause`; checked in the tablet's cookie store). Tapping a
+  recent server therefore logs in automatically. No checkbox added; the server repo was not changed.
+- 2026-11-17 — `connectedAndroidTest` leaves the app installed
+  (`android.injected.androidTest.leaveApksInstalledAfterRun`): uninstalling wiped the real tablet's
+  login and recent servers.
+- 2026-11-17 — Display name (launcher, start screen, system dialogs): **"Moon Light Control"**, with
+  spaces (supersedes "MoonLightControl" of 2026-11-16 for the app label only; the product, package id,
+  user-agent token `MoonLightControlAndroid` and docs keep the one-word name).
+- 2026-11-17 — **Discovery ("Find servers") moved forward from milestone 4** (user request): a button
+  on the start screen scans the device's IPv4 subnet(s) on every Wi-Fi/Ethernet network (all of them,
+  not only the default one), limited to the device's own /24, port 8080, `GET /api/v1/health`, 64 in
+  parallel, connect timeout 700 ms / read 1.5 s, body capped at 4 KB, through the network it belongs to
+  (`Network.openConnection`). A host counts as a MoonLightControl server only if the body has the exact
+  health shape (status "ok", version, commit, uptimeSeconds). Results appear as they answer, show the
+  server version and open with one tap; they are kept in memory only (the recent list is the
+  persistent one). Android 17: the scan asks for `ACCESS_LOCAL_NETWORK` first, like opening a server.
+  No server change.
+- 2026-11-17 — **Package / applicationId `br.com.moonaudio.moonlightcontrol`** (supersedes
+  `io.github.luizhenriquemm.moonlightcontrol`; Kotlin packages and the shared namespace follow). The
+  user owns moonaudio.com.br; changed before any release because it is permanent on Google Play.
+- 2026-11-17 — **Publisher: the user as an individual** (Moon Audio has no CNPJ yet). Consequences for
+  the release milestone: Google Play personal account → closed test with ≥ 12 testers opted in for
+  14 consecutive days before production; Android developer verification (enforced in Brazil since
+  2026-09-30) as an individual, which also covers APKs distributed outside Play (or "limited
+  distribution" to ≤ 20 devices without verification). The domain hosts the privacy policy and the
+  product page; it is not required for an individual account (organizations must verify a website).

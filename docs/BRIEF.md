@@ -209,8 +209,8 @@ LAN scanning) before implementing.
 
 ## 8. Milestones
 
-1. **Skeleton** — Gradle project, package id (proposal: `io.github.luizhenriquemm.moonlightcontrol`;
-   permanent once on Google Play), app name **MoonLightControl** and icon (the crescent moon of the web
+1. **Skeleton** — Gradle project, package id `br.com.moonaudio.moonlightcontrol` (was `io.github.luizhenriquemm.moonlightcontrol` until 2026-11-17;
+   permanent once on Google Play), app name **Moon Light Control** and icon (the crescent moon of the web
    UI), one Activity, WebView opening a typed URL, cleartext config, unit-test setup,
    `./gradlew lint test` green. Check Android's local-network access rules for the target SDK.
 2. **Hosts** — host model, storage, list/add/edit/delete/reorder, auto-resume of the last host, Test via
@@ -220,9 +220,12 @@ LAN scanning) before implementing.
    bridge** (§6; the server side is already implemented). Manual test
    list on the real tablet against a real server (import, export, faders with several fingers, scene
    recall, HTTPS).
-4. **Discovery** — subnet scan (and mDNS if the server adds it). Part of v1.
+4. **Discovery** — subnet scan (and mDNS if the server adds it). Part of v1. Subnet scan done
+   2026-11-17 (see DECISIONS).
 5. **Release** — signing key (kept outside the repo), versioning, APK for sideloading first, then
    Google Play (developer account, AAB, Play App Signing, Data safety form, privacy policy, policies).
+   Publisher = the user as an individual: 12-tester / 14-day closed test, developer verification
+   (Brazil, since 2026-09-30); privacy policy and product page on moonaudio.com.br.
    CI (GitHub Actions) when the user asks.
 6. **iOS** (later) — same shell on iOS (WKWebView). Needs a Mac with Xcode and an Apple Developer account.
 

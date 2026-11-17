@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- To find the Wi-Fi/Ethernet subnet to scan for servers ("Find servers"). -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- Android 17+: required for any traffic to the LAN, including the WebView's (BRIEF §5). -->
     <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
 

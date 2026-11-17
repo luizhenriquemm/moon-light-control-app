@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "io.github.luizhenriquemm.moonlightcontrol"
+    namespace = "br.com.moonaudio.moonlightcontrol"
     compileSdk = 37
 
     defaultConfig {
         // Permanent once published on Google Play.
-        applicationId = "io.github.luizhenriquemm.moonlightcontrol"
+        applicationId = "br.com.moonaudio.moonlightcontrol"
         minSdk = 26
         targetSdk = 37
         versionCode = 1
@@ -41,10 +41,12 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.webkit)
+    implementation(libs.androidx.datastore)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.core)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
