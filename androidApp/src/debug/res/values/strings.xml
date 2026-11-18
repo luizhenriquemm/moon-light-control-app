@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The debug build installs next to the real app (applicationIdSuffix ".debug"). -->
+    <string name="app_name" translatable="false">Moon Light Control (debug)</string>
+</resources>

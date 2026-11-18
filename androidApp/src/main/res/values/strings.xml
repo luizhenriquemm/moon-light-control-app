@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Moon Light Control</string>
+
+    <string name="connect_title">Connect to a server</string>
+    <string name="connect_address_label">Server address</string>
+    <string name="connect_address_hint">e.g. 10.1.1.20 or stage-pi.local</string>
+    <string name="connect_open">Open</string>
+
+    <string name="connect_error_empty">Type the server address.</string>
+    <string name="connect_error_scheme">Only http:// and https:// addresses are supported.</string>
+    <string name="connect_error_host">This server address is not valid.</string>
+    <string name="connect_error_port">The port must be a number from 1 to 65535.</string>
+
+    <string name="recent_title">Recent servers</string>
+    <string name="recent_last_connected">Last connected: %1$s</string>
+    <string name="recent_just_now">just now</string>
+    <string name="recent_remove">Remove %1$s from the list</string>
+
+    <string name="discover_title">Servers on this network</string>
+    <string name="discover_button">Find servers</string>
+    <string name="discover_scanning">Searching %1$s…</string>
+    <string name="discover_none">No server found. Check that this device is on the same Wi-Fi as the server and that the server uses port 8080.</string>
+    <string name="discover_no_network">Connect to the lighting network’s Wi-Fi to find servers.</string>
+    <string name="discover_version">Version %1$s</string>
+
+    <string name="console_error_title">Can\u2019t reach the server</string>
+    <string name="console_error_detail">%1$s\n%2$s</string>
+    <string name="console_error_certificate">The server\u2019s certificate was not trusted.</string>
+    <string name="console_retry">Try again</string>
+    <string name="console_change_server">Change server</string>
+
+    <string name="download_saved">Saved: %1$s</string>
+    <string name="download_failed">Could not save %1$s</string>
+
+    <string name="cert_unknown_title">Trust this server?</string>
+    <string name="cert_unknown_message">%1$s uses its own (self-signed) certificate. Trust it only if this is your MoonLightControl server.\n\nCertificate fingerprint (SHA-256):\n%2$s</string>
+    <string name="cert_changed_title">The server\u2019s certificate changed!</string>
+    <string name="cert_changed_message">%1$s presented a different certificate than the one you trusted before. Someone may be impersonating the server. Continue only if you changed the server\u2019s certificate yourself.\n\nTrusted before:\n%2$s\n\nPresented now:\n%3$s</string>
+    <string name="cert_trust">Trust</string>
+    <string name="cert_trust_new">Trust the new certificate</string>
+    <string name="cert_cancel">Cancel</string>
+
+    <string name="about">About</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_description">Opens the MoonLightControl lighting console of a server on your local network.</string>
+    <string name="about_license">Free software under the GNU General Public License, version 3 or later. It comes with no warranty.</string>
+    <string name="about_source">Source code: %1$s</string>
+    <string name="about_copyright">© 2026 Moon Audio</string>
+    <string name="about_close">Close</string>
+    <string name="source_url" translatable="false">https://github.com/luizhenriquemm/moon-light-control-app</string>
+
+    <string name="local_network_denied">Moon Light Control needs access to the local network to reach the server. Allow “Nearby devices” in the app settings.</string>
+    <string name="open_app_settings">Open settings</string>
+</resources>
